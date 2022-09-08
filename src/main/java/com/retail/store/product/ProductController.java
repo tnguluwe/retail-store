@@ -16,15 +16,30 @@ public class ProductController {
     @Autowired
     IProductService productService;
 
-    @RequestMapping(value = "/products", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/view-products", method = RequestMethod.GET, produces = "application/json")
     public List<Product> findAllProducts() {
         return productService.allProducts();
     }
 
-    @GetMapping("/product/{id}")
+    @GetMapping("/view-product/{id}")
     public Product findAllProducts(@PathVariable Long id) {
         if (id == null)
             return null;
         return productService.findProductById(id);
+    }
+
+    @PostMapping("/add-product")
+    public void addProduct(@RequestBody Product newProduct) {
+        productService.addProduct(newProduct);
+    }
+
+    @PutMapping("modify-product")
+    public void modifyProduct(@RequestBody Product newProduct) {
+        productService.modifyProduct(newProduct);
+    }
+
+    @DeleteMapping("/remove-product/{id}")
+    public void removeProduct(@PathVariable Long id) {
+        productService.removeProduct(id);
     }
 }

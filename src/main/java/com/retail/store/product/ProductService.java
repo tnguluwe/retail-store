@@ -5,10 +5,11 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * <p>Description: This is a service class that simply stores a list of products in memory for demonstration purposes.</p>
- *
+ * <p>
  * Created by tonderain on 2022/09/05.
  */
 @Component
@@ -31,20 +32,36 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public Product findProductById(long id) {
+    public Product findProductById(Long productId) {
         return products.stream()
-                .filter(product -> product.getId() == id)
+                .filter(product -> product.getId() == productId)
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException(String.format("Product with id %d has not been found.", id)));  // Note that a new exception class should be created e.g. ProductNotFoundException a sub-class of RuntimeException.
+                .orElseThrow(() -> new RuntimeException(String.format("Product with id %d has not been found.", productId)));  // Note that a new exception class should be created e.g. ProductNotFoundException a sub-class of RuntimeException.
     }
 
     @Override
     public void addProduct(Product newProduct) {
-        // TODO - implement me
+        Optional.of(newProduct).orElseThrow(() -> new NullPointerException("The new supplied product cannot be null"));
+        products.add(newProduct);
     }
 
     @Override
-    public void updateProduct(Product product) {
-        // TODO - implement me
+    public void modifyProduct(Product modifiedProduct) {
+        removeProductById(modifiedProduct.getId());
+        products.add(modifiedProduct);
+    }
+
+    @Override
+    public void removeProduct(Long id) {
+        removeProductById(id);
+    }
+
+    private void removeProductById(long id) {
+        for (Product product : products) {
+            if (product.getId() == id) {
+                products.remove(product);
+                break;
+            }
+        }
     }
 }

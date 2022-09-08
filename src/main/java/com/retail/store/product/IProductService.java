@@ -18,9 +18,11 @@ public interface IProductService {
 
     List<Product> allProducts();
 
-    Product findProductById(long id);
+    Product findProductById(Long productId);
 
     void addProduct(Product newProduct);
 
-    void updateProduct(Product product);
+    void modifyProduct(Product modifiedProduct);
+
+    void removeProduct(Long productId);
 }
