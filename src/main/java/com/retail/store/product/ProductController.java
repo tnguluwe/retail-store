@@ -1,14 +1,13 @@
 package com.retail.store.product;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 /**
+ * <p>Description: This is a controller class that is used to expose the REST API endpoint for the retail store.</p>
+ *
  * Created by tonderain on 2022/09/05.
  */
 @RestController
@@ -17,13 +16,12 @@ public class ProductController {
     @Autowired
     IProductService productService;
 
-    @GetMapping("/product/all")
+    @RequestMapping(value = "/products", method = RequestMethod.GET, produces = "application/json")
     public List<Product> findAllProducts() {
         return productService.allProducts();
     }
 
     @GetMapping("/product/{id}")
-    @ResponseBody
     public Product findAllProducts(@PathVariable Long id) {
         if (id == null)
             return null;

@@ -1,6 +1,8 @@
 package com.retail.store.product;
 
 /**
+ *  <p>Description: This is the domain POJO that holds the product information.</p>
+ *
  * Created by tonderain on 2022/09/05.
  */
 public class Product {

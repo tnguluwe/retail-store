@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
+ * <p>Description: This is a service class that simply stores a list of products in memory for demonstration purposes.</p>
+ *
  * Created by tonderain on 2022/09/05.
  */
 @Component
