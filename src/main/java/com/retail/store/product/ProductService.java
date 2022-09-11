@@ -1,6 +1,6 @@
 package com.retail.store.product;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,11 +12,11 @@ import java.util.Optional;
  * <p>
  * Created by tonderain on 2022/09/05.
  */
-@Component
+@Service
 public class ProductService implements IProductService {
 
     // Temporarily store the products in memory
-    List<Product> products = new ArrayList<>();
+    final List<Product> products = new ArrayList<>();
 
     {
         products.addAll(Arrays.asList(
@@ -36,12 +36,12 @@ public class ProductService implements IProductService {
         return products.stream()
                 .filter(product -> product.getId() == productId)
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException(String.format("Product with id %d has not been found.", productId)));  // Note that a new exception class should be created e.g. ProductNotFoundException a sub-class of RuntimeException.
+                .orElse(null);
     }
 
     @Override
     public void addProduct(Product newProduct) {
-        Optional.of(newProduct).orElseThrow(() -> new NullPointerException("The new supplied product cannot be null"));
+        Optional.ofNullable(newProduct).orElseThrow(() -> new ProductException("The new supplied product cannot be null"));
         products.add(newProduct);
     }
 

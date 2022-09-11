@@ -7,7 +7,7 @@ package com.retail.store.product;
  */
 public class Product {
     private final long id;
-    private final String description;
+    private String description;
 
     public Product(long id, String description) {
         this.id = id;
@@ -20,5 +20,9 @@ public class Product {
 
     public String getDescription() {
         return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

@@ -22,7 +22,7 @@ public class ProductController {
     }
 
     @GetMapping("/view-product/{id}")
-    public Product findAllProducts(@PathVariable Long id) {
+    public Product findProductById(@PathVariable Long id) {
         if (id == null)
             return null;
         return productService.findProductById(id);
@@ -33,7 +33,7 @@ public class ProductController {
         productService.addProduct(newProduct);
     }
 
-    @PutMapping("modify-product")
+    @PutMapping("/modify-product")
     public void modifyProduct(@RequestBody Product newProduct) {
         productService.modifyProduct(newProduct);
     }
